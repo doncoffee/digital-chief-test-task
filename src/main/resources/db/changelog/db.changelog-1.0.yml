@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-university-table
+      author: doncoffee
+      changes:
+        - createTable:
+            tableName: universities
+            columns:
+              - column:
+                  name: university_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: foundation_year
+                  type: DATE
+
+  - changeSet:
+      id: create-faculty-table
+      author: doncoffee
+      changes:
+        - createTable:
+            tableName: faculties
+            columns:
+              - column:
+                  name: faculty_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: student_quantity
+                  type: INTEGER
+              - column:
+                  name: major_quantity
+                  type: INTEGER
+              - column:
+                  name: dean
+                  type: VARCHAR(255)
+              - column:
+                  name: university_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_faculty_university
+                    referencedTableName: universities
+                    referencedColumnNames: university_id
